@@ -24,16 +24,22 @@ const events: TimelineEvent[] = [
     date: "April 13, 2024",
     description:
       "We got engaged. It was the most confusing day of my life - I was nervous. Since it was an arranged marriage, I didn't know you yet.",
+    media: "/timeline/engagement.jpeg",
+    mediaType: "image",
   },
   {
     date: "April 14, 2024",
     description:
       "Our first WhatsApp conversation. I was hesitant and nervous about how you'd react, but you were nice and sweet. We shared our hobbies, education, dreams. You mentioned you loved taking pictures.",
+    media: "/timeline/first_convo.jpeg",
+    mediaType: "image",
   },
   {
     date: "April 18, 2024 at 11:27 PM",
     description:
-      "I said 'I Love You' for the first time. It was emotional for me - I fell in love with you in that first week. Maybe it was attraction, but I said it. We were both shocked and emotional.",
+      "I said 'I Love You' for the first time. It was emotional for me - I fell in love with you in that first week. Maybe it was attraction, but I said it. We were both shocked and emotional. This Picture cuz you are my MOONLIGHT 🌙✨",
+    media: "/timeline/my-moonlight.jpeg",
+    mediaType: "image",
   },
   {
     date: "May 4, 2024 at 10:47 PM",
@@ -46,6 +52,8 @@ const events: TimelineEvent[] = [
     date: "May 13, 2024",
     description:
       "I wanted to surprise you with flowers when you came back from university, but ran into a scam. You got upset because it was your first request and I failed. I tried my best to make you believe it wasn't completely my fault.",
+    media: "/timeline/sorry.jpeg",
+    mediaType: "image",
   },
   {
     date: "June 8, 2024",
