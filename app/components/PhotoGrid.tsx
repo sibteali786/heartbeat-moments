@@ -15,72 +15,119 @@ const photos = [
   {
     src: "/photos/1.jpeg",
     height: 250,
+    type: "image",
     message: "Your smile lights up my entire world 🌟",
   },
   {
     src: "/photos/2.jpeg",
     height: 200,
+    type: "image",
     message: "Every moment with you feels like a dream 💭",
   },
   {
     src: "/photos/3.jpeg",
     height: 280,
+    type: "image",
     message: "You make my heart skip a beat every single time 💓",
   },
   {
     src: "/photos/4.jpeg",
     height: 220,
+    type: "image",
     message: "Your kindness is the most beautiful thing about you 🌸",
   },
   {
     src: "/photos/5.jpeg",
     height: 300,
+    type: "image",
     message: "I fall in love with you more each day 🌙",
+  },
+  {
+    src: "/photos/20.mp4",
+    height: 260,
+    type: "video",
+    message: "Forever grateful for every second with you ⏰",
   },
   {
     src: "/photos/6.jpeg",
     height: 210,
+    type: "image",
     message: "You are my sunshine on cloudy days ☀️",
   },
   {
     src: "/photos/7.jpeg",
     height: 240,
+    type: "image",
     message: "Your laughter is my favorite sound 🎵",
+  },
+  {
+    src: "/photos/18.mp4",
+    height: 280,
+    type: "video",
+    message: "These memories play on repeat in my heart 💫",
   },
   {
     src: "/photos/8.jpeg",
     height: 260,
+    type: "image",
     message: "Being with you feels like coming home 🏡",
+  },
+  {
+    src: "/photos/15.mp4",
+    height: 260,
+    type: "video",
+    message: "Every moment captured with you is precious 🎥",
   },
   {
     src: "/photos/9.jpeg",
     height: 230,
+    type: "image",
     message: "You're the reason I believe in love 💝",
   },
   {
     src: "/photos/10.jpeg",
     height: 290,
+    type: "image",
     message: "My life became beautiful the day I met you 🦋",
   },
   {
     src: "/photos/11.jpeg",
     height: 220,
+    type: "image",
     message: "You are my forever and always 💕",
   },
   {
     src: "/photos/12.jpeg",
     height: 270,
+    type: "image",
     message: "Every picture of you is my favorite 📸",
   },
   {
     src: "/photos/13.jpeg",
     height: 240,
+    type: "image",
     message: "You are absolutely gorgeous, inside and out ✨",
   },
-  // Add 7 more when ready:
-  // { src: "/photos/14.jpeg", height: 250, message: "..." },
-  // { src: "/photos/15.jpeg", height: 210, message: "..." },
-  // ... up to 20
+
+  {
+    src: "/photos/16.jpeg",
+    height: 230,
+    type: "image",
+    message: "Your presence makes everything better 🌺",
+  },
+  {
+    src: "/photos/17.jpeg",
+    height: 250,
+    type: "image",
+    message: "You're my favorite adventure 🗺️",
+  },
+
+  {
+    src: "/photos/19.mp4",
+    height: 240,
+    type: "video",
+    message: "Our story keeps getting better 📽️",
+  },
 ];
 
 const breakpointColumns = {
@@ -127,14 +174,26 @@ export default function PhotoGrid() {
                 className="relative w-full overflow-hidden rounded-lg"
                 style={{ height: `${photo.height}px` }}
               >
-                <Image
-                  src={photo.src}
-                  alt={`Memory ${index + 1}`}
-                  fill
-                  sizes="(max-width: 700px) 50vw, (max-width: 1100px) 33vw, 25vw"
-                  className="object-cover shadow-lg transition-all duration-300 group-hover:shadow-2xl"
-                  unoptimized
-                />
+                {photo.type === "image" ? (
+                  <Image
+                    src={photo.src}
+                    alt={`Memory ${index + 1}`}
+                    fill
+                    sizes="(max-width: 700px) 50vw, (max-width: 1100px) 33vw, 25vw"
+                    className="object-cover shadow-lg transition-all duration-300 group-hover:shadow-2xl"
+                    unoptimized
+                  />
+                ) : (
+                  <video
+                    src={photo.src}
+                    className="w-full h-full object-cover shadow-lg transition-all duration-300 group-hover:shadow-2xl"
+                    muted
+                    loop
+                    playsInline
+                    autoPlay
+                    preload="metadata"
+                  />
+                )}
 
                 {/* Gradient overlay */}
                 <div className="absolute inset-0 bg-gradient-to-t from-pink-500/30 to-transparent opacity-30 group-hover:opacity-0 transition-opacity duration-300" />
@@ -149,6 +208,19 @@ export default function PhotoGrid() {
                     Tap to see message 💕
                   </p>
                 </motion.div>
+
+                {/* Video indicator */}
+                {photo.type === "video" && (
+                  <div className="absolute top-2 right-2 bg-black/50 rounded-full p-2 backdrop-blur-sm">
+                    <svg
+                      className="w-4 h-4 text-white"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z" />
+                    </svg>
+                  </div>
+                )}
               </div>
             </motion.div>
           ))}
@@ -178,15 +250,24 @@ export default function PhotoGrid() {
               className="space-y-4"
             >
               <div className="relative w-full h-96 rounded-xl overflow-hidden shadow-lg bg-gray-100">
-                <Image
-                  src={photos[selectedPhoto].src}
-                  alt="Selected memory"
-                  fill
-                  className="object-contain"
-                  unoptimized
-                />
+                {photos[selectedPhoto].type === "image" ? (
+                  <Image
+                    src={photos[selectedPhoto].src}
+                    alt="Selected memory"
+                    fill
+                    className="object-contain"
+                    unoptimized
+                  />
+                ) : (
+                  <video
+                    src={photos[selectedPhoto].src}
+                    controls
+                    className="w-full h-full object-contain rounded-xl"
+                    autoPlay
+                    playsInline
+                  />
+                )}
               </div>
-
               <motion.p
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
