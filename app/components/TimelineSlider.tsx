@@ -90,6 +90,14 @@ export default function TimelineSlider({
 }: TimelineSliderProps) {
   const [currentStep, setCurrentStep] = useState(0);
   const isLastStep = currentStep === events.length;
+  const [showCelebration, setShowCelebration] = useState(false);
+
+  const handleYes = () => {
+    setShowCelebration(true);
+    setTimeout(() => {
+      onClose();
+    }, 3000); // Close after 3 seconds
+  };
 
   if (!isOpen) return null;
 
@@ -189,7 +197,7 @@ export default function TimelineSlider({
                 transition={{ duration: 0.5 }}
                 className="w-full"
               >
-                <Card className="bg-linear-to-br from-yellow-50 via-pink-50 to-red-50 border-pink-300 p-8 md:p-12 text-center mx-4 relative overflow-hidden">
+                <Card className="bg-gradient-to-br from-yellow-50 via-pink-50 to-red-50 border-pink-300 p-8 md:p-12 text-center mx-4 relative overflow-hidden">
                   {/* Floating hearts animation */}
                   {Array.from({ length: 20 }).map((_, i) => (
                     <motion.div
@@ -215,6 +223,76 @@ export default function TimelineSlider({
                       <Heart className="w-6 h-6 fill-red-400 text-red-400" />
                     </motion.div>
                   ))}
+
+                  {/* Celebration explosion when clicked */}
+                  <AnimatePresence>
+                    {showCelebration && (
+                      <>
+                        {Array.from({ length: 50 }).map((_, i) => (
+                          <motion.div
+                            key={`celebration-${i}`}
+                            className="absolute top-1/2 left-1/2"
+                            initial={{
+                              scale: 0,
+                              x: 0,
+                              y: 0,
+                              opacity: 1,
+                            }}
+                            animate={{
+                              scale: [0, 1.5, 0],
+                              x: (Math.random() - 0.5) * 800,
+                              y: (Math.random() - 0.5) * 800,
+                              opacity: [1, 1, 0],
+                              rotate: Math.random() * 360,
+                            }}
+                            transition={{
+                              duration: 2,
+                              delay: i * 0.02,
+                              ease: "easeOut",
+                            }}
+                          >
+                            <Heart
+                              className={`w-8 h-8 ${
+                                i % 3 === 0
+                                  ? "fill-red-500 text-red-500"
+                                  : i % 3 === 1
+                                    ? "fill-pink-500 text-pink-500"
+                                    : "fill-yellow-400 text-yellow-400"
+                              }`}
+                            />
+                          </motion.div>
+                        ))}
+
+                        {/* Success message */}
+                        <motion.div
+                          initial={{ scale: 0, opacity: 0 }}
+                          animate={{ scale: 1, opacity: 1 }}
+                          className="absolute inset-0 flex items-center justify-center bg-white/90 rounded-3xl z-20"
+                        >
+                          <div className="text-center">
+                            <motion.div
+                              animate={{
+                                scale: [1, 1.2, 1],
+                                rotate: [0, 10, -10, 0],
+                              }}
+                              transition={{
+                                duration: 0.5,
+                                repeat: Infinity,
+                              }}
+                            >
+                              <Heart className="w-32 h-32 fill-red-500 text-red-500 mx-auto mb-4" />
+                            </motion.div>
+                            <h3 className="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-red-600">
+                              Yay! 💕✨
+                            </h3>
+                            <p className="text-gray-700 text-xl mt-2">
+                              I love you so much!
+                            </p>
+                          </div>
+                        </motion.div>
+                      </>
+                    )}
+                  </AnimatePresence>
 
                   <motion.div
                     animate={{
@@ -244,7 +322,7 @@ export default function TimelineSlider({
                     <Button
                       size="lg"
                       className="px-8 py-6 bg-gradient-to-r from-pink-500 to-red-500 hover:from-pink-600 hover:to-red-600 text-white font-semibold text-lg rounded-full shadow-lg"
-                      onClick={onClose}
+                      onClick={handleYes}
                     >
                       Yes! 💕
                     </Button>
