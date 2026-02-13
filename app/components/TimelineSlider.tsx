@@ -250,19 +250,6 @@ export default function TimelineSlider({
 
                   {/* Celebration explosion when clicked */}
                   <AnimatePresence>
-                    {showCelebration && noClickCount >= 5 && (
-                      <motion.div
-                        key="yes-message"
-                        initial={{ opacity: 0, scale: 0.5 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ delay: 0.3, type: "spring" }}
-                        className="mt-6 relative z-10"
-                      >
-                        <p className="text-xl sm:text-2xl md:text-3xl font-bold font-dancing text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-red-600">
-                          My Deaaaar Chulbul 💕✨
-                        </p>
-                      </motion.div>
-                    )}
                     {showCelebration && (
                       <>
                         {/* Fireworks bursts */}
@@ -455,7 +442,19 @@ export default function TimelineSlider({
                       </>
                     )}
                   </AnimatePresence>
-
+                  {
+                    <motion.div
+                      key="yes-message"
+                      initial={{ opacity: 0, scale: 0.5 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ delay: 0.3, type: "spring" }}
+                      className="mt-2 relative z-10"
+                    >
+                      <p className="text-xl sm:text-2xl md:text-3xl font-bold font-dancing text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-red-600">
+                        My Deaaaar Chulbul 💕✨
+                      </p>
+                    </motion.div>
+                  }
                   <motion.div
                     animate={{
                       scale: [1, 1.2, 1],
@@ -466,16 +465,16 @@ export default function TimelineSlider({
                       repeat: Infinity,
                       ease: "easeInOut",
                     }}
-                    className="flex justify-center mb-6 relative z-10"
+                    className="flex justify-center mb-2 relative z-10"
                   >
-                    <Heart className="w-20 h-20 fill-red-500 text-red-500" />
+                    <Heart className="w-10 h-10 fill-red-500 text-red-500" />
                   </motion.div>
 
-                  <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-red-600 mb-4 md:mb-6 relative z-10 font-dancing">
+                  <h2 className="text-3xl sm:text-2xl md:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-red-600 mb-2 md:mb-2 relative z-10 font-dancing">
                     Will You Be My Valentine? 💝
                   </h2>
 
-                  <p className="text-base sm:text-lg md:text-xl mb-6 md:mb-8 relative z-10 font-poppins text-gray-700">
+                  <p className="text-base sm:text-md md:text-md mb-2 md:mb-2 relative z-10 font-poppins text-gray-700">
                     Every moment with you has been a blessing. I love you more
                     than words can say.
                   </p>
@@ -483,15 +482,15 @@ export default function TimelineSlider({
                   <div className="flex gap-2 justify-center relative z-10 items-center flex-wrap font-poppins">
                     {!showCelebration && (
                       <Button
-                        size="sm"
-                        className="px-8 py-6 bg-gradient-to-r from-pink-500 to-red-500 hover:from-pink-600 hover:to-red-600 text-white font-semibold text-lg rounded-full shadow-lg"
+                        size="xs"
+                        className="px-4 py-4 bg-gradient-to-r from-pink-500 to-red-500 hover:from-pink-600 hover:to-red-600 text-white font-semibold text-sm rounded-full shadow-lg"
                         onClick={handleYes}
                       >
                         Yes! 💕
                       </Button>
                     )}
 
-                    {noClickCount < 5 && (
+                    {!showCelebration && noClickCount < 5 && (
                       <motion.div
                         animate={{
                           scale: 1 - noClickCount * 0.15,
@@ -499,9 +498,9 @@ export default function TimelineSlider({
                         transition={{ duration: 0.3 }}
                       >
                         <Button
-                          size="sm"
+                          size="xs"
                           variant="outline"
-                          className="px-8 py-6 bg-white hover:bg-gray-100 text-gray-700 font-semibold text-lg rounded-full shadow-lg border-2 border-gray-300"
+                          className="px-4 py-4 bg-white hover:bg-gray-100 text-gray-700 font-semibold text-sm rounded-full shadow-lg border-2 border-gray-300"
                           onClick={handleNo}
                           style={{
                             fontSize: `${1 - noClickCount * 0.1}rem`,
