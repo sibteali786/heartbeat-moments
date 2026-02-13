@@ -32,18 +32,6 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-pink-200 via-red-200 to-pink-300 overflow-hidden relative">
       <PhotoGrid />
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="pointer-events-auto">
-          {Array.from({ length: 14 }).map((_, i) => (
-            <StaticHeart
-              key={i}
-              index={i}
-              onClick={() => setSelectedHeart(i)}
-              isSpecial={i === 13}
-            />
-          ))}
-        </div>
-      </div>
 
       <div className="relative z-10 flex items-center justify-center min-h-screen p-4 pointer-events-none">
         <div className="text-center">
@@ -56,6 +44,18 @@ export default function Home() {
           <p className="text-lg text-yellow-300 drop-shadow-lg mt-2 animate-pulse">
             ✨ Look for the golden heart ✨
           </p>
+        </div>
+      </div>
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="pointer-events-auto">
+          {Array.from({ length: 14 }).map((_, i) => (
+            <StaticHeart
+              key={i}
+              index={i}
+              onClick={() => setSelectedHeart(i)}
+              isSpecial={i === 13}
+            />
+          ))}
         </div>
       </div>
 
