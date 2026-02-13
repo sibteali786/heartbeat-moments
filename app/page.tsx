@@ -5,6 +5,8 @@ import Heart from "./components/Heart";
 import HeartModal from "./components/HeartModal";
 import StaticHeart from "./components/StaticHeart";
 import TimelineSlider from "./components/TimelineSlider";
+import PhotoGrid from "./components/PhotoGrid";
+import Image from "next/image";
 
 const reasons = [
   "You are kind and treat your elders, family, and every friend with kindness - a remarkable quality I love about you.",
@@ -29,6 +31,8 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-pink-200 via-red-200 to-pink-300 overflow-hidden relative">
+      
+      <PhotoGrid />
       <div className="absolute inset-0 pointer-events-none">
         <div className="pointer-events-auto">
           {Array.from({ length: 14 }).map((_, i) => (

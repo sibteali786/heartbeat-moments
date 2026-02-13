@@ -96,7 +96,7 @@ export default function TimelineSlider({
     setShowCelebration(true);
     setTimeout(() => {
       onClose();
-    }, 3000); // Close after 3 seconds
+    }, 6000); // Close after 3 seconds
   };
 
   if (!isOpen) return null;
@@ -228,66 +228,191 @@ export default function TimelineSlider({
                   <AnimatePresence>
                     {showCelebration && (
                       <>
-                        {Array.from({ length: 50 }).map((_, i) => (
+                        {/* Fireworks bursts */}
+                        {Array.from({ length: 5 }).map((_, burstIndex) => (
+                          <div key={`burst-${burstIndex}`}>
+                            {Array.from({ length: 12 }).map((_, i) => {
+                              const angle = (i / 12) * Math.PI * 2;
+                              const distance = 200 + Math.random() * 100;
+                              return (
+                                <motion.div
+                                  key={`firework-${burstIndex}-${i}`}
+                                  className="absolute"
+                                  style={{
+                                    top: `${30 + burstIndex * 15}%`,
+                                    left: `${20 + burstIndex * 15}%`,
+                                  }}
+                                  initial={{
+                                    scale: 0,
+                                    x: 0,
+                                    y: 0,
+                                    opacity: 0,
+                                  }}
+                                  animate={{
+                                    scale: [0, 1, 0],
+                                    x: Math.cos(angle) * distance,
+                                    y: Math.sin(angle) * distance,
+                                    opacity: [0, 1, 0],
+                                  }}
+                                  transition={{
+                                    duration: 2.5,
+                                    delay: burstIndex * 0.3,
+                                    ease: "easeOut",
+                                    repeatDelay: 3,
+                                    repeat: Infinity,
+                                  }}
+                                >
+                                  <div
+                                    className={`w-3 h-3 rounded-full ${
+                                      burstIndex % 3 === 0
+                                        ? "bg-yellow-400"
+                                        : burstIndex % 3 === 1
+                                          ? "bg-pink-500"
+                                          : "bg-red-500"
+                                    }`}
+                                  />
+                                </motion.div>
+                              );
+                            })}
+                          </div>
+                        ))}
+
+                        {/* Falling rose petals */}
+                        {Array.from({ length: 30 }).map((_, i) => (
                           <motion.div
-                            key={`celebration-${i}`}
-                            className="absolute top-1/2 left-1/2"
+                            key={`petal-${i}`}
+                            className="absolute pointer-events-none" // Add this to prevent clicks
                             initial={{
-                              scale: 0,
-                              x: 0,
-                              y: 0,
-                              opacity: 1,
+                              top: -20,
+                              left: `${Math.random() * 100}%`,
+                              opacity: 0,
+                              rotate: 0,
                             }}
                             animate={{
-                              scale: [0, 1.5, 0],
-                              x: (Math.random() - 0.5) * 800,
-                              y: (Math.random() - 0.5) * 800,
-                              opacity: [1, 1, 0],
-                              rotate: Math.random() * 360,
+                              top: "120%",
+                              opacity: [0, 1, 1, 0],
+                              rotate: 360,
+                              x: [0, Math.sin(i) * 50, 0],
                             }}
                             transition={{
-                              duration: 2,
-                              delay: i * 0.02,
-                              ease: "easeOut",
+                              duration: 8 + Math.random() * 3, // Changed: 8-11 seconds
+                              delay: i * 0.1, // Changed: 0-3 seconds delay
+                              ease: "linear",
+                              repeat: Infinity, // Add this to loop forever
+                              repeatDelay: 2, // Add 2s pause between loops
                             }}
                           >
-                            <Heart
-                              className={`w-8 h-8 ${
-                                i % 3 === 0
-                                  ? "fill-red-500 text-red-500"
-                                  : i % 3 === 1
-                                    ? "fill-pink-500 text-pink-500"
-                                    : "fill-yellow-400 text-yellow-400"
-                              }`}
-                            />
+                            <div
+                              className="text-2xl"
+                              style={{
+                                filter:
+                                  "drop-shadow(0 2px 4px rgba(0,0,0,0.1))",
+                              }}
+                            >
+                              🌸
+                            </div>
                           </motion.div>
                         ))}
 
-                        {/* Success message */}
+                        {/* Floating kiss emojis */}
+                        {Array.from({ length: 15 }).map((_, i) => (
+                          <motion.div
+                            key={`kiss-${i}`}
+                            className="absolute pointer-events-none"
+                            initial={{
+                              bottom: -20,
+                              left: `${Math.random() * 100}%`,
+                              opacity: 0,
+                              rotate: 0,
+                            }}
+                            animate={{
+                              bottom: "120%",
+                              opacity: [0, 1, 1, 0],
+                              rotate: [0, 180, 360],
+                              x: [
+                                (Math.random() - 0.5) * 100,
+                                (Math.random() - 0.5) * 100,
+                              ],
+                            }}
+                            transition={{
+                              duration: 4 + Math.random() * 2,
+                              delay: i * 0.2,
+                              ease: "easeInOut",
+                              repeat: Infinity,
+                              repeatDelay: 1,
+                            }}
+                          >
+                            <div className="text-3xl">💋</div>
+                          </motion.div>
+                        ))}
+
+                        {/* Success message with sparkle effect */}
                         <motion.div
                           initial={{ scale: 0, opacity: 0 }}
                           animate={{ scale: 1, opacity: 1 }}
-                          className="absolute inset-0 flex items-center justify-center bg-white/90 rounded-3xl z-20"
+                          transition={{ delay: 3 }} // Changed from 0.5 to 3 seconds
+                          className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-white/95 to-pink-50/95 rounded-3xl z-20 backdrop-blur-sm"
                         >
-                          <div className="text-center">
+                          <div className="text-center relative">
+                            {/* Sparkles around the heart */}
+                            {Array.from({ length: 8 }).map((_, i) => {
+                              const angle = (i / 8) * Math.PI * 2;
+                              return (
+                                <motion.div
+                                  key={`sparkle-${i}`}
+                                  className="absolute"
+                                  style={{
+                                    left: "50%",
+                                    top: "50%",
+                                  }}
+                                  animate={{
+                                    x: Math.cos(angle) * 80,
+                                    y: Math.sin(angle) * 80,
+                                    scale: [0, 1, 0],
+                                    opacity: [0, 1, 0],
+                                  }}
+                                  transition={{
+                                    duration: 1.5,
+                                    delay: i * 0.1,
+                                    repeat: Infinity,
+                                    repeatDelay: 1,
+                                  }}
+                                >
+                                  <div className="text-2xl">✨</div>
+                                </motion.div>
+                              );
+                            })}
+
                             <motion.div
                               animate={{
-                                scale: [1, 1.2, 1],
-                                rotate: [0, 10, -10, 0],
+                                scale: [1, 1.1, 1],
+                                rotate: [0, 5, -5, 0],
                               }}
                               transition={{
-                                duration: 0.5,
+                                duration: 0.6,
                                 repeat: Infinity,
                               }}
                             >
                               <Heart className="w-32 h-32 fill-red-500 text-red-500 mx-auto mb-4" />
                             </motion.div>
-                            <h3 className="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-red-600">
+
+                            <motion.h3
+                              initial={{ y: 20, opacity: 0 }}
+                              animate={{ y: 0, opacity: 1 }}
+                              transition={{ delay: 0.2 }} // Relative to parent's 3s delay
+                              className="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-red-600"
+                            >
                               Yay! 💕✨
-                            </h3>
-                            <p className="text-gray-700 text-xl mt-2">
+                            </motion.h3>
+
+                            <motion.p
+                              initial={{ y: 20, opacity: 0 }}
+                              animate={{ y: 0, opacity: 1 }}
+                              transition={{ delay: 0.4 }} // Relative to parent's 3s delay
+                              className="text-gray-700 text-xl mt-2"
+                            >
                               I love you so much!
-                            </p>
+                            </motion.p>
                           </div>
                         </motion.div>
                       </>
