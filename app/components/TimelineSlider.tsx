@@ -179,15 +179,15 @@ export default function TimelineSlider({
                 transition={{ duration: 0.3 }}
                 className="w-full"
               >
-                <Card className="bg-linear-to-br from-pink-50 to-red-50 border-pink-200 p-6 md:p-8 mx-4">
-                  <p className="text-red-600 font-semibold text-sm mb-4">
+                <Card className="bg-linear-to-br from-pink-50 to-red-50 border-pink-200 p-4 md:p-6 lg:p-8 mx-2 md:mx-4">
+                  <p className="text-red-600 font-semibold text-xs md:text-sm mb-3 md:mb-4 font-poppins">
                     {events[currentStep].date}
                   </p>
 
                   {events[currentStep].media && (
-                    <div className="mb-6">
+                    <div className="mb-4 md:mb-6">
                       {events[currentStep].mediaType === "image" ? (
-                        <div className="relative w-full h-100 md:h-[450px] rounded-xl overflow-hidden shadow-lg bg-gray-100">
+                        <div className="relative w-full h-[250px] sm:h-[350px] md:h-[450px] rounded-xl overflow-hidden shadow-lg bg-gray-100">
                           <Image
                             src={events[currentStep].media!}
                             alt="Memory"
@@ -196,7 +196,7 @@ export default function TimelineSlider({
                           />
                         </div>
                       ) : (
-                        <div className="w-full h-[400px] md:h-[450px] rounded-xl overflow-hidden shadow-lg bg-black">
+                        <div className="w-full h-[250px] sm:h-[350px] md:h-[450px] rounded-xl overflow-hidden shadow-lg bg-black">
                           <video
                             src={events[currentStep].media}
                             controls
@@ -207,7 +207,7 @@ export default function TimelineSlider({
                     </div>
                   )}
 
-                  <p className="text-gray-800 text-base md:text-lg leading-relaxed font-poppins">
+                  <p className="text-gray-800 text-sm md:text-base lg:text-lg leading-relaxed font-poppins">
                     {events[currentStep].description}
                   </p>
                 </Card>
@@ -258,8 +258,8 @@ export default function TimelineSlider({
                         transition={{ delay: 0.3, type: "spring" }}
                         className="mt-6 relative z-10"
                       >
-                        <p className="text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-red-600 text-2xl md:text-3xl font-bold font-dancing">
-                          MY DEAAAAR CHULBULLL 💕✨
+                        <p className="text-xl sm:text-2xl md:text-3xl font-bold font-dancing text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-red-600">
+                          My Deaaaar Chulbul 💕✨
                         </p>
                       </motion.div>
                     )}
@@ -436,8 +436,8 @@ export default function TimelineSlider({
                             <motion.h3
                               initial={{ y: 20, opacity: 0 }}
                               animate={{ y: 0, opacity: 1 }}
-                              transition={{ delay: 0.2 }} // Relative to parent's 3s delay
-                              className="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-red-600 font-dancing"
+                              transition={{ delay: 0.2 }}
+                              className="text-3xl sm:text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-red-600 font-dancing"
                             >
                               Yay! 💕✨
                             </motion.h3>
@@ -445,8 +445,8 @@ export default function TimelineSlider({
                             <motion.p
                               initial={{ y: 20, opacity: 0 }}
                               animate={{ y: 0, opacity: 1 }}
-                              transition={{ delay: 0.4 }} // Relative to parent's 3s delay
-                              className="text-gray-700 text-xl mt-2 font-poppins"
+                              transition={{ delay: 0.4 }}
+                              className="text-lg sm:text-xl md:text-2xl mt-2 font-poppins text-gray-700"
                             >
                               I love you so much!
                             </motion.p>
@@ -471,19 +471,19 @@ export default function TimelineSlider({
                     <Heart className="w-20 h-20 fill-red-500 text-red-500" />
                   </motion.div>
 
-                  <h2 className="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-red-600 mb-6 relative z-10 font-dancing">
+                  <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-red-600 mb-4 md:mb-6 relative z-10 font-dancing">
                     Will You Be My Valentine? 💝
                   </h2>
 
-                  <p className="text-gray-700 text-lg md:text-xl mb-8 relative z-10 font-poppins">
+                  <p className="text-base sm:text-lg md:text-xl mb-6 md:mb-8 relative z-10 font-poppins text-gray-700">
                     Every moment with you has been a blessing. I love you more
                     than words can say.
                   </p>
 
-                  <div className="flex gap-4 justify-center relative z-10 items-center flex-wrap font-poppins">
+                  <div className="flex gap-2 justify-center relative z-10 items-center flex-wrap font-poppins">
                     {!showCelebration && (
                       <Button
-                        size="lg"
+                        size="sm"
                         className="px-8 py-6 bg-gradient-to-r from-pink-500 to-red-500 hover:from-pink-600 hover:to-red-600 text-white font-semibold text-lg rounded-full shadow-lg"
                         onClick={handleYes}
                       >
@@ -499,7 +499,7 @@ export default function TimelineSlider({
                         transition={{ duration: 0.3 }}
                       >
                         <Button
-                          size="lg"
+                          size="sm"
                           variant="outline"
                           className="px-8 py-6 bg-white hover:bg-gray-100 text-gray-700 font-semibold text-lg rounded-full shadow-lg border-2 border-gray-300"
                           onClick={handleNo}
