@@ -14,75 +14,80 @@ import {
 const photos = [
   {
     src: "/photos/1.jpeg",
-    height: 400,
+    height: 250,
     message: "Your smile lights up my entire world 🌟",
   },
   {
     src: "/photos/2.jpeg",
-    height: 300,
+    height: 200,
     message: "Every moment with you feels like a dream 💭",
   },
   {
     src: "/photos/3.jpeg",
-    height: 450,
+    height: 280,
     message: "You make my heart skip a beat every single time 💓",
   },
   {
     src: "/photos/4.jpeg",
-    height: 350,
+    height: 220,
     message: "Your kindness is the most beautiful thing about you 🌸",
   },
   {
     src: "/photos/5.jpeg",
-    height: 500,
+    height: 300,
     message: "I fall in love with you more each day 🌙",
   },
   {
     src: "/photos/6.jpeg",
-    height: 320,
+    height: 210,
     message: "You are my sunshine on cloudy days ☀️",
   },
   {
     src: "/photos/7.jpeg",
-    height: 380,
+    height: 240,
     message: "Your laughter is my favorite sound 🎵",
   },
   {
     src: "/photos/8.jpeg",
-    height: 420,
+    height: 260,
     message: "Being with you feels like coming home 🏡",
   },
   {
     src: "/photos/9.jpeg",
-    height: 360,
+    height: 230,
     message: "You're the reason I believe in love 💝",
   },
   {
     src: "/photos/10.jpeg",
-    height: 480,
+    height: 290,
     message: "My life became beautiful the day I met you 🦋",
   },
   {
     src: "/photos/11.jpeg",
-    height: 340,
+    height: 220,
     message: "You are my forever and always 💕",
   },
   {
     src: "/photos/12.jpeg",
-    height: 460,
+    height: 270,
     message: "Every picture of you is my favorite 📸",
   },
   {
     src: "/photos/13.jpeg",
-    height: 390,
+    height: 240,
     message: "You are absolutely gorgeous, inside and out ✨",
   },
+  // Add 7 more when ready:
+  // { src: "/photos/14.jpeg", height: 250, message: "..." },
+  // { src: "/photos/15.jpeg", height: 210, message: "..." },
+  // ... up to 20
 ];
 
 const breakpointColumns = {
-  default: 4,
-  1100: 3,
-  700: 2,
+  default: 5, // Desktop: 5 columns
+  1100: 4, // Tablet landscape: 4 columns
+  700: 3, // Tablet portrait: 3 columns
+  500: 3, // Mobile: 3 columns (was 2)
 };
 
 export default function PhotoGrid() {
@@ -91,7 +96,7 @@ export default function PhotoGrid() {
 
   return (
     <>
-      <div className="fixed inset-0 overflow-hidden">
+      <div className="w-full min-h-screen ">
         <Masonry
           breakpointCols={breakpointColumns}
           className="flex gap-4 p-4"

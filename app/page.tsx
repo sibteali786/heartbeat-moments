@@ -30,10 +30,16 @@ export default function Home() {
   const [showTimeline, setShowTimeline] = useState(false);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-200 via-red-200 to-pink-300 overflow-hidden relative">
-      <PhotoGrid />
+    <div className="min-h-screen overflow-y-auto overflow-x-hidden relative">
+      {/* Scrollable background with photos */}
+      <div className="min-h-[200vh]">
+        {" "}
+        {/* Make it tall enough to scroll */}
+        <PhotoGrid />
+      </div>
 
-      <div className="relative z-10 flex items-center justify-center min-h-screen p-4 pointer-events-none">
+      {/* Fixed text overlay */}
+      <div className="fixed inset-0 flex items-center justify-center pointer-events-none z-20">
         <div className="text-center">
           <h1 className="text-5xl md:text-7xl font-bold text-white drop-shadow-2xl mb-4">
             For My Love 💕
@@ -46,7 +52,9 @@ export default function Home() {
           </p>
         </div>
       </div>
-      <div className="absolute inset-0 pointer-events-none">
+
+      {/* Fixed hearts overlay */}
+      <div className="fixed inset-0 pointer-events-none z-30">
         <div className="pointer-events-auto">
           {Array.from({ length: 14 }).map((_, i) => (
             <StaticHeart
