@@ -207,7 +207,7 @@ export default function TimelineSlider({
                     </div>
                   )}
 
-                  <p className="text-gray-800 text-base md:text-lg leading-relaxed">
+                  <p className="text-gray-800 text-base md:text-lg leading-relaxed font-poppins">
                     {events[currentStep].description}
                   </p>
                 </Card>
@@ -258,7 +258,7 @@ export default function TimelineSlider({
                         transition={{ delay: 0.3, type: "spring" }}
                         className="mt-6 relative z-10"
                       >
-                        <p className="text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-red-600 text-2xl md:text-3xl font-bold">
+                        <p className="text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-red-600 text-2xl md:text-3xl font-bold font-dancing">
                           MY DEAAAAR CHULBULLL 💕✨
                         </p>
                       </motion.div>
@@ -437,7 +437,7 @@ export default function TimelineSlider({
                               initial={{ y: 20, opacity: 0 }}
                               animate={{ y: 0, opacity: 1 }}
                               transition={{ delay: 0.2 }} // Relative to parent's 3s delay
-                              className="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-red-600"
+                              className="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-red-600 font-dancing"
                             >
                               Yay! 💕✨
                             </motion.h3>
@@ -446,7 +446,7 @@ export default function TimelineSlider({
                               initial={{ y: 20, opacity: 0 }}
                               animate={{ y: 0, opacity: 1 }}
                               transition={{ delay: 0.4 }} // Relative to parent's 3s delay
-                              className="text-gray-700 text-xl mt-2"
+                              className="text-gray-700 text-xl mt-2 font-poppins"
                             >
                               I love you so much!
                             </motion.p>
@@ -471,23 +471,25 @@ export default function TimelineSlider({
                     <Heart className="w-20 h-20 fill-red-500 text-red-500" />
                   </motion.div>
 
-                  <h2 className="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-red-600 mb-6 relative z-10">
+                  <h2 className="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-red-600 mb-6 relative z-10 font-dancing">
                     Will You Be My Valentine? 💝
                   </h2>
 
-                  <p className="text-gray-700 text-lg md:text-xl mb-8 relative z-10">
+                  <p className="text-gray-700 text-lg md:text-xl mb-8 relative z-10 font-poppins">
                     Every moment with you has been a blessing. I love you more
                     than words can say.
                   </p>
 
-                  <div className="flex gap-4 justify-center relative z-10 items-center flex-wrap">
-                    {!showCelebration && <Button
-                      size="lg"
-                      className="px-8 py-6 bg-gradient-to-r from-pink-500 to-red-500 hover:from-pink-600 hover:to-red-600 text-white font-semibold text-lg rounded-full shadow-lg"
-                      onClick={handleYes}
-                    >
-                      Yes! 💕
-                    </Button>}
+                  <div className="flex gap-4 justify-center relative z-10 items-center flex-wrap font-poppins">
+                    {!showCelebration && (
+                      <Button
+                        size="lg"
+                        className="px-8 py-6 bg-gradient-to-r from-pink-500 to-red-500 hover:from-pink-600 hover:to-red-600 text-white font-semibold text-lg rounded-full shadow-lg"
+                        onClick={handleYes}
+                      >
+                        Yes! 💕
+                      </Button>
+                    )}
 
                     {noClickCount < 5 && (
                       <motion.div
@@ -517,7 +519,7 @@ export default function TimelineSlider({
                       animate={{ opacity: 1, y: 0 }}
                       className="mt-6 relative z-10"
                     >
-                      <p className="text-pink-600 text-lg font-medium italic">
+                      <p className="text-pink-600 text-lg font-medium italic font-poppins">
                         {noMessages[noClickCount - 1]}
                       </p>
                     </motion.div>

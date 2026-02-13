@@ -26,7 +26,7 @@ export default function HeartModal({
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="sm:max-w-md bg-gradient-to-br from-pink-50 to-red-50 border-pink-200 p-4">
         <DialogHeader>
-          <DialogTitle className="text-2xl text-center text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-red-600">
+          <DialogTitle className="text-2xl text-center text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-red-600 font-dancing font-bold">
             Why I Love You 💕
           </DialogTitle>
         </DialogHeader>
@@ -43,7 +43,7 @@ export default function HeartModal({
             </div>
           )}
 
-          <p className="text-gray-700 text-base leading-relaxed text-center px-2">
+          <p className="text-gray-700 text-base leading-relaxed text-center px-2 font-poppins">
             {reason}
           </p>
         </motion.div>

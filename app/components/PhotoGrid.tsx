@@ -145,7 +145,7 @@ export default function PhotoGrid() {
                   whileHover={{ opacity: 1 }}
                   className="absolute inset-0 flex items-center justify-center bg-black/40"
                 >
-                  <p className="text-white font-semibold text-lg drop-shadow-lg">
+                  <p className="text-white font-semibold text-lg drop-shadow-lg font-poppins">
                     Tap to see message 💕
                   </p>
                 </motion.div>
@@ -165,7 +165,7 @@ export default function PhotoGrid() {
       >
         <DialogContent className="sm:max-w-lg bg-gradient-to-br from-pink-50 to-red-50 border-pink-200">
           <DialogHeader>
-            <DialogTitle className="text-2xl text-center text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-red-600">
+            <DialogTitle className="text-2xl text-center text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-red-600 font-dancing font-bold">
               A Message For You 💕
             </DialogTitle>
           </DialogHeader>
@@ -191,7 +191,7 @@ export default function PhotoGrid() {
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.2 }}
-                className="text-gray-800 text-xl font-medium leading-relaxed text-center px-4 py-6"
+                className="text-gray-800 text-xl font-medium leading-relaxed text-center px-4 py-6 font-poppins"
               >
                 {photos[selectedPhoto].message}
               </motion.p>
