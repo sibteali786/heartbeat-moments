@@ -39,7 +39,8 @@ export default function Home() {
       </div>
 
       {/* Fixed text overlay */}
-      <div className="fixed inset-0 flex items-center justify-center pointer-events-none z-20">
+      {/* Fixed text overlay - INCREASE z-index */}
+      <div className="fixed inset-0 flex items-center justify-center pointer-events-none z-40">
         <div className="text-center">
           <h1 className="text-5xl md:text-7xl font-bold text-white drop-shadow-2xl mb-4 font-dancing">
             For My Love 💕
@@ -53,7 +54,7 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Fixed hearts overlay */}
+      {/* Fixed hearts overlay - DECREASE z-index */}
       <div className="fixed inset-0 pointer-events-none z-30">
         <div className="pointer-events-auto">
           {Array.from({ length: 14 }).map((_, i) => (

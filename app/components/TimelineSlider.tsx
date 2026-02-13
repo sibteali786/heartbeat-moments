@@ -100,6 +100,7 @@ export default function TimelineSlider({
   const isLastStep = currentStep === events.length;
   const [showCelebration, setShowCelebration] = useState(false);
   const [noClickCount, setNoClickCount] = useState(0);
+  const [showThankYouVideo, setShowThankYouVideo] = useState(false);
 
   const noMessages = [
     "Are you sure? I'll wait forever 💕",
@@ -119,8 +120,11 @@ export default function TimelineSlider({
   const handleYes = () => {
     setShowCelebration(true);
     setTimeout(() => {
+      setShowThankYouVideo(true);
+    }, 3500); // Show video after 3.5s
+    setTimeout(() => {
       onClose();
-    }, 6000);
+    }, 10000); // Close after 15s total
   };
 
   if (!isOpen) return null;
@@ -374,70 +378,103 @@ export default function TimelineSlider({
                         <motion.div
                           initial={{ scale: 0, opacity: 0 }}
                           animate={{ scale: 1, opacity: 1 }}
-                          transition={{ delay: 3 }} // Changed from 0.5 to 3 seconds
+                          transition={{ delay: 3 }}
                           className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-white/95 to-pink-50/95 rounded-3xl z-20 backdrop-blur-sm"
                         >
-                          <div className="text-center relative">
-                            {/* Sparkles around the heart */}
-                            {Array.from({ length: 8 }).map((_, i) => {
-                              const angle = (i / 8) * Math.PI * 2;
-                              return (
+                          <AnimatePresence mode="wait">
+                            {!showThankYouVideo ? (
+                              <motion.div
+                                key="yay-message"
+                                initial={{ opacity: 1 }}
+                                exit={{ opacity: 0, scale: 0.8 }}
+                                transition={{ duration: 0.5 }}
+                                className="text-center relative"
+                              >
+                                {/* Sparkles around the heart */}
+                                {Array.from({ length: 8 }).map((_, i) => {
+                                  const angle = (i / 8) * Math.PI * 2;
+                                  return (
+                                    <motion.div
+                                      key={`sparkle-${i}`}
+                                      className="absolute"
+                                      style={{
+                                        left: "50%",
+                                        top: "50%",
+                                      }}
+                                      animate={{
+                                        x: Math.cos(angle) * 80,
+                                        y: Math.sin(angle) * 80,
+                                        scale: [0, 1, 0],
+                                        opacity: [0, 1, 0],
+                                      }}
+                                      transition={{
+                                        duration: 1.5,
+                                        delay: i * 0.1,
+                                        repeat: Infinity,
+                                        repeatDelay: 1,
+                                      }}
+                                    >
+                                      <div className="text-2xl">✨</div>
+                                    </motion.div>
+                                  );
+                                })}
+
                                 <motion.div
-                                  key={`sparkle-${i}`}
-                                  className="absolute"
-                                  style={{
-                                    left: "50%",
-                                    top: "50%",
-                                  }}
                                   animate={{
-                                    x: Math.cos(angle) * 80,
-                                    y: Math.sin(angle) * 80,
-                                    scale: [0, 1, 0],
-                                    opacity: [0, 1, 0],
+                                    scale: [1, 1.1, 1],
+                                    rotate: [0, 5, -5, 0],
                                   }}
                                   transition={{
-                                    duration: 1.5,
-                                    delay: i * 0.1,
+                                    duration: 0.6,
                                     repeat: Infinity,
-                                    repeatDelay: 1,
                                   }}
                                 >
-                                  <div className="text-2xl">✨</div>
+                                  <Heart className="w-32 h-32 fill-red-500 text-red-500 mx-auto mb-4" />
                                 </motion.div>
-                              );
-                            })}
 
-                            <motion.div
-                              animate={{
-                                scale: [1, 1.1, 1],
-                                rotate: [0, 5, -5, 0],
-                              }}
-                              transition={{
-                                duration: 0.6,
-                                repeat: Infinity,
-                              }}
-                            >
-                              <Heart className="w-32 h-32 fill-red-500 text-red-500 mx-auto mb-4" />
-                            </motion.div>
+                                <motion.h3
+                                  initial={{ y: 20, opacity: 0 }}
+                                  animate={{ y: 0, opacity: 1 }}
+                                  transition={{ delay: 0.2 }}
+                                  className="text-3xl sm:text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-red-600 font-dancing"
+                                >
+                                  Yay! 💕✨
+                                </motion.h3>
 
-                            <motion.h3
-                              initial={{ y: 20, opacity: 0 }}
-                              animate={{ y: 0, opacity: 1 }}
-                              transition={{ delay: 0.2 }}
-                              className="text-3xl sm:text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-red-600 font-dancing"
-                            >
-                              Yay! 💕✨
-                            </motion.h3>
-
-                            <motion.p
-                              initial={{ y: 20, opacity: 0 }}
-                              animate={{ y: 0, opacity: 1 }}
-                              transition={{ delay: 0.4 }}
-                              className="text-lg sm:text-xl md:text-2xl mt-2 font-poppins text-gray-700"
-                            >
-                              I love you so much!
-                            </motion.p>
-                          </div>
+                                <motion.p
+                                  initial={{ y: 20, opacity: 0 }}
+                                  animate={{ y: 0, opacity: 1 }}
+                                  transition={{ delay: 0.4 }}
+                                  className="text-lg sm:text-xl md:text-2xl mt-2 font-poppins text-gray-700"
+                                >
+                                  I love you so much!
+                                </motion.p>
+                              </motion.div>
+                            ) : (
+                              <motion.div
+                                key="thank-you-video"
+                                initial={{ opacity: 0, scale: 0.8 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                transition={{ duration: 0.5 }}
+                                className="w-full h-full flex flex-col items-center justify-center p-2"
+                              >
+                                <video
+                                  src="/timeline/thanks.mp4"
+                                  autoPlay
+                                  playsInline
+                                  className="w-auto max-w-[300px] sm:max-w-[360px] h-auto max-h-[550px] sm:max-h-[650px] rounded-2xl shadow-2xl object-contain"
+                                />
+                                <motion.p
+                                  initial={{ y: 20, opacity: 0 }}
+                                  animate={{ y: 0, opacity: 1 }}
+                                  transition={{ delay: 0.5 }}
+                                  className="text-center text-lg sm:text-xl md:text-2xl font-dancing text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-red-600 mt-2"
+                                >
+                                  Thank you for saying yes! 🙏💕
+                                </motion.p>
+                              </motion.div>
+                            )}
+                          </AnimatePresence>
                         </motion.div>
                       </>
                     )}

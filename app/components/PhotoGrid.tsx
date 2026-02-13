@@ -108,7 +108,12 @@ const photos = [
     type: "image",
     message: "You are absolutely gorgeous, inside and out ✨",
   },
-
+  {
+    src: "/photos/14.mp4",
+    height: 260,
+    type: "video",
+    message: "Our love story is my favorite movie 🎬",
+  },
   {
     src: "/photos/16.jpeg",
     height: 230,

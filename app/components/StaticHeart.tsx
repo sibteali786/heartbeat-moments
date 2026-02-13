@@ -55,7 +55,7 @@ export default function StaticHeart({
       onClick={onClick}
     >
       <HeartIcon
-        className={`${isSpecial ? "w-20 h-20 fill-yellow-400 text-yellow-500" : "w-14 h-14 fill-red-500 text-red-600"} 
+        className={`${isSpecial ? "w-10 h-10 fill-yellow-400 text-yellow-500" : "w-8 h-8 fill-red-500 text-red-600"} 
         drop-shadow-2xl`}
         strokeWidth={2}
       />
