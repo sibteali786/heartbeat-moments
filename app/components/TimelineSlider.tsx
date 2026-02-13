@@ -99,12 +99,28 @@ export default function TimelineSlider({
   const [currentStep, setCurrentStep] = useState(0);
   const isLastStep = currentStep === events.length;
   const [showCelebration, setShowCelebration] = useState(false);
+  const [noClickCount, setNoClickCount] = useState(0);
+
+  const noMessages = [
+    "Are you sure? I'll wait forever 💕",
+    "Really? But we're perfect together! 🥺",
+    "Come on... you know you want to say yes 💖",
+    "I'm not giving up on us! Take your time 🌙",
+    "Last chance... (I'll still ask again) 😊",
+    "I knew you loved me! Only 'Yes' left now 💝",
+  ];
+
+  const handleNo = () => {
+    if (noClickCount < 5) {
+      setNoClickCount(noClickCount + 1);
+    }
+  };
 
   const handleYes = () => {
     setShowCelebration(true);
     setTimeout(() => {
       onClose();
-    }, 6000); // Close after 3 seconds
+    }, 6000);
   };
 
   if (!isOpen) return null;
@@ -234,6 +250,19 @@ export default function TimelineSlider({
 
                   {/* Celebration explosion when clicked */}
                   <AnimatePresence>
+                    {showCelebration && noClickCount >= 5 && (
+                      <motion.div
+                        key="yes-message"
+                        initial={{ opacity: 0, scale: 0.5 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ delay: 0.3, type: "spring" }}
+                        className="mt-6 relative z-10"
+                      >
+                        <p className="text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-red-600 text-2xl md:text-3xl font-bold">
+                          MY DEAAAAR CHULBULLL 💕✨
+                        </p>
+                      </motion.div>
+                    )}
                     {showCelebration && (
                       <>
                         {/* Fireworks bursts */}
@@ -451,15 +480,48 @@ export default function TimelineSlider({
                     than words can say.
                   </p>
 
-                  <div className="flex gap-4 justify-center relative z-10">
-                    <Button
+                  <div className="flex gap-4 justify-center relative z-10 items-center flex-wrap">
+                    {!showCelebration && <Button
                       size="lg"
                       className="px-8 py-6 bg-gradient-to-r from-pink-500 to-red-500 hover:from-pink-600 hover:to-red-600 text-white font-semibold text-lg rounded-full shadow-lg"
                       onClick={handleYes}
                     >
                       Yes! 💕
-                    </Button>
+                    </Button>}
+
+                    {noClickCount < 5 && (
+                      <motion.div
+                        animate={{
+                          scale: 1 - noClickCount * 0.15,
+                        }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        <Button
+                          size="lg"
+                          variant="outline"
+                          className="px-8 py-6 bg-white hover:bg-gray-100 text-gray-700 font-semibold text-lg rounded-full shadow-lg border-2 border-gray-300"
+                          onClick={handleNo}
+                          style={{
+                            fontSize: `${1 - noClickCount * 0.1}rem`,
+                          }}
+                        >
+                          No 💔
+                        </Button>
+                      </motion.div>
+                    )}
                   </div>
+                  {/* Message after clicking No */}
+                  {noClickCount > 0 && !showCelebration && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="mt-6 relative z-10"
+                    >
+                      <p className="text-pink-600 text-lg font-medium italic">
+                        {noMessages[noClickCount - 1]}
+                      </p>
+                    </motion.div>
+                  )}
                 </Card>
               </motion.div>
             )}
